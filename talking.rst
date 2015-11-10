@@ -107,6 +107,8 @@ Beam Interactive communicates over plain websockets using JSON. The basic format
 
         An error message describing what went wrong.
 
+.. _report-packet:
+
 .. object:: Report (data)
 
     Clients should report user input periodically as defined in the handshake. Events should be throttled and combined if frequent input (such as from a mouseMove in JavaScript) is given; there's no advantage to sending input more frequently than the reporting interval.

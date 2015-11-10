@@ -14,5 +14,6 @@ Contents
    tutorial
    games
    talking
+   playbooks
    python_api
 
