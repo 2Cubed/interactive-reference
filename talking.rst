@@ -7,7 +7,7 @@ Talking to Beam Interactive
 Robot to Beam Interactive
 =========================
 
-The basic protocol is made by sending a stream of `protocol buffers <https://developers.google.com/protocol-buffers/?hl=en>`_ over a TCP socket. Each packet is preceded by its length followed by the packet ID, as variable length integers. Variable integers are described in the `protocol buffer specification <https://developers.google.com/protocol-buffers/docs/encoding#varints>`_.
+The basic protocol is made by sending a stream of `protocol buffers <https://developers.google.com/protocol-buffers/?hl=en>`_ over a TCP socket. Each packet is preceded by its length followed by the packet ID, as variable length unsigned integers. (Note that the length refers to the encoded protobuf data, not including the packet ID or the length itself.) Variable integers are described in the `protocol buffer specification <https://developers.google.com/protocol-buffers/docs/encoding#varints>`_.
 
 ::
 

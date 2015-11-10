@@ -56,7 +56,7 @@ Quick Example Code
     @asyncio.coroutine
     def connect():
         # start() takes the remote address of Beam Interactive, the channel
-        # ID, and channel the stream key. This information can be obtained
+        # ID, and channel the auth key. This information can be obtained
         # via the backend API, which is documented at:
         # https://developer.beam.pro/api/v1/
         conn = yield from start('127.0.0.1:3442', 42, 'asdf', loop)
@@ -97,7 +97,7 @@ API Documentation
 
     :param string|(host, port) address: the address of the Interactive daemon to connect to, in the form ``host:port`` or as a tuple ``(host, port)``
     :param int channel: the channel ID to authenticate as
-    :param string key: the stream key of the channel to authenticate as
+    :param string key: the auth key of the channel to authenticate as
     :param asyncio.BaseEventLoop loop: the event loop to connect on, defaults to the currently running loop via ``asyncio.get_event_loop()``
     :returns: a Connection instance
 
