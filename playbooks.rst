@@ -145,3 +145,21 @@ Below is the complete playbook structure, displayed as it might be represented i
             Report Report
         }
     }
+
+Running Playbooks
+=================
+
+See :doc:`/talking` for more information about the structure of the packets.
+
+- The frontend connects to Beam Interactive with a websocket. The authentication flow is the same as usual, *but* the user connects to ``/playbook`` rather than ``/play/:channel``.
+- The frontend then sends a ``play`` packet down, which contains the playbook file (in the format described above) encoded as a JSON string.
+- The frontend should then wait for an ``erro`` packet, indicating an error occurred, or a ``pack`` (Play ACKnowledgement) indicating that their playbook is loaded and ready to use.
+- The robot should then connect to the user's own channel. At this point, a ``prdy`` packet is sent down to the frontend indicating that a robot is connected and ready to go.
+
+From this point on, the frontend and robot communicate with ``prdy`` packets, which modify the playback status when sent from the frontend, and indicate the status has changed when sent from the daemon. For example:
+
+- ``prdy{"play":true}`` from the frontend will start the playback. ``prdy{"play":true}`` will be sent back from the daemon in response.
+- ``prdy{"play":false}`` will be sent from the daemon when playback has terminated.
+- ``prdy{"connected":true}`` will be sent from the daemon when the robot connects, and ``prdy{"connected":false}`` when it disconnects.
+
+Additionally, the daemon may send up ``erro`` packets when any of the virtual users received an error event.
