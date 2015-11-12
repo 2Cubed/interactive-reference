@@ -16,4 +16,5 @@ Contents
    talking
    playbooks
    python_api
+   endpoints
 
