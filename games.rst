@@ -1,21 +1,6 @@
 Games
 =====
 
-Schema
-------
-
-Being relatively static resources, games are stored in SQL. The schema which tetrisd requires is as follows:
-
-.. code-block:: sql
-
-    CREATE TABLE `tetris_games` (
-      `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-      `controls` text NOT NULL,
-      PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-There may be other columns added, but these two are all that Tetris needs. The ``controls`` columns should be a JSON-encoded controls object, as described below.
-
 The Controls Object
 -------------------
 
@@ -97,7 +82,7 @@ The JSON object should be in much the same format, simply with StudlyCase conver
 Character Codes
 ^^^^^^^^^^^^^^^
 
-Character codes are used for requesting input for Tetris games.These are standard JavaScript character codes, with the following special cases:
+Character codes are used for requesting input for Tetris games.These are standard JavaScript keys codes, with the following special cases:
 
 .. _codes:
 
@@ -107,6 +92,8 @@ Character codes are used for requesting input for Tetris games.These are standar
 - ``3``: scroll wheel up
 - ``4``: scroll wheel down
 - ``1024 ≤ code < 2048``: custom button
+
+`This website <http://keycode.info/>`_ may be useful if you'd like a quick way to look up JavaScript key codes.
 
 Analysis Lists
 ^^^^^^^^^^^^^^
@@ -122,6 +109,8 @@ Analysis lists are lists of unsigned integers which express what kinds of analys
 2    Standard Deviation
 3    Quartiles
 ==== =============
+
+Make sure to read :doc:`/fieldguide` for useful tips and tricks regarding analysis.
 
 Validation Checklist
 ^^^^^^^^^^^^^^^^^^^^

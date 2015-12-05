@@ -14,6 +14,7 @@ Contents
    tutorial
    games
    talking
+   fieldguide
    playbooks
    python_api
    endpoints

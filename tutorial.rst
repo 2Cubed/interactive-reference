@@ -41,7 +41,15 @@ Great! Now, hop over to the Beam developers site to register your game.
 1. Registering Your Game
 ------------------------
 
-todo after developers site is up...
+Head over to the `Interactive section <https://beam.pro/tetris/overview>`_ of the Beam website. Click the "Create Game" link under the navbar, and let's make a new game called "Test".  Creative, I know. You can leave the description and installation instructions blank for now, and hit Save.
+
+.. note::
+
+    Interactive games are composed of multiple versions. You can create as many versions as you'd like, edit them, and test with them in the playbook editor. These versions are marked as drafts, and won't be visible to anyone else on the site. After you're satisfied with one of your drafts, you can submit it for publication, but we won't go that far in this tutorial.
+
+You should now be back on the overview page. Click on the right-most red circle under the "Test" heading to add a new game. When you have multiple versions of your game, this area will display them like a timeline. Go ahead and mash the blue "Save" button, then click "Edit Controls".
+
+You're now in the control editor. For our simple robot, we just want to be able to record joystick input the X and Y axes. Click the "Add Joystick" button twice, and then check the "Mean" option under "Analysis" for both joysticks you added. Everything else can be left to the defaults. Save your changes, then you're good to go!
 
 2. Write up the Bot
 -------------------
