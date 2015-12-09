@@ -19,3 +19,7 @@ Contents
    python_api
    endpoints
 
+.. toctree::
+   :hidden:
+
+   help/*
