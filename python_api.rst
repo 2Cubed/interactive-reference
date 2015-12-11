@@ -12,7 +12,7 @@ Quick Example Code
 .. code-block:: python
 
     import asyncio
-    import start from beam_interactive
+    from beam_interactive import start
     import beam_interactive.proto
     import random
 
