@@ -12,17 +12,30 @@ Quick Example Code
 .. code-block:: python
 
     import asyncio
+    from requests import Session
     from beam_interactive import start
-    import beam_interactive.proto
-    import random
+    from beam_interactive import proto
+    from random import random
 
 
-    def on_error(e):
+    path = "https://beam.pro/api/v1"
+    auth = {
+        "username": "USERNAME",
+        "password": "PASSWORD"
+    }
+
+    session = Session()
+    auth['id'] = session.post(path + "/users/login", auth).json()['channel']['id']
+
+    data = session.get(path + "/tetris/{id}/robot".format(id=auth['id'])).json()
+
+
+    def on_error(error, conn):
         """This is called when we get an Error packet. It contains
         a single attribute, 'message'.
         """
         print('Oh no, there was an error!')
-        print(e.message)
+        print(error.message)
 
 
     def on_report(report, conn):
@@ -43,9 +56,9 @@ Quick Example Code
         # https://developers.google.com/protocol-buffers/docs/pythontutorial
         report = proto.ProgressUpdate()
         prog = report.progress.add()
-        prog.target = proto.ProgressUpdate.TargetType.TACTILE
+        prog.target = prog.TACTILE
         prog.code = 38
-        prog.progress = random.random()
+        prog.progress = random()
 
         conn.send(report)
 
@@ -59,7 +72,7 @@ Quick Example Code
         # ID, and channel the auth key. This information can be obtained
         # via the backend API, which is documented at:
         # https://developer.beam.pro/api/v1/
-        conn = yield from start('127.0.0.1:3442', 42, 'asdf', loop)
+        conn = yield from start(data['address'], auth['id'], data['key'], loop)
 
         handlers = {
             proto.id.error: on_error,
@@ -70,16 +83,16 @@ Quick Example Code
         # a complete message from Beam Interactive, or False if we
         # got disconnected.
         while (yield from conn.wait_message()):
-            decoded, bytes = conn.get_packet()
-            id = proto.id.get_packet_id(decoded)
+            decoded, packet_bytes = conn.get_packet()
+            packet_id = proto.id.get_packet_id(decoded)
 
             if decoded is None:
-                print('We got a bunch of unknown bytes')
-                print(bytes)
-            elif id in handlers:
-                handlers[id](packet)
+                print('We got a bunch of unknown bytes.')
+                print(packet_id)
+            elif packet_id in handlers:
+                handlers[packet_id](decoded, conn)
             else:
-                print("we got packet %d but didn't handle it!" % id)
+                print("We got packet {} but didn't handle it!".format(packet_id))
 
         conn.close()
 
