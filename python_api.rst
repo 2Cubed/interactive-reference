@@ -24,10 +24,16 @@ Quick Example Code
         "password": "PASSWORD"
     }
 
-    session = Session()
-    auth['id'] = session.post(path + "/users/login", auth).json()['channel']['id']
 
-    data = session.get(path + "/tetris/{id}/robot".format(id=auth['id'])).json()
+    def login(session, username, password):
+        """Log into the Beam servers via the API."""
+        auth = dict(username=username, password=password)
+        return session.post(path + "/users/login", auth).json()
+
+
+    def get_tetris(session, channel):
+        """Retrieve interactive connection information."""
+        return session.get(path + "/tetris/{id}/robot".format(id=channel)).json()
 
 
     def on_error(error, conn):
@@ -68,11 +74,18 @@ Quick Example Code
 
     @asyncio.coroutine
     def connect():
+        # Initialize session, authenticate to Beam servers, and retrieve Tetris
+        # address and key.
+        session = Session()
+        channel_id = login(session, **auth)['channel']['id']
+        
+        data = get_tetris(session, channel_id)
+        
         # start() takes the remote address of Beam Interactive, the channel
         # ID, and channel the auth key. This information can be obtained
         # via the backend API, which is documented at:
         # https://developer.beam.pro/api/v1/
-        conn = yield from start(data['address'], auth['id'], data['key'], loop)
+        conn = yield from start(data['address'], channel_id, data['key'], loop)
 
         handlers = {
             proto.id.error: on_error,
