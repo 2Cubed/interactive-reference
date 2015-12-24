@@ -112,7 +112,9 @@ Quick Example Code
     loop.run_until_complete(connect())
 
     try:
-        loop.run_forever()
+        loop.run_until_complete(connect())
+    except KeyboardInterrupt:
+        print("Terminated.")
     finally:
         loop.close()
 
