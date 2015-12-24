@@ -109,8 +109,6 @@ Quick Example Code
 
         conn.close()
 
-    loop.run_until_complete(connect())
-
     try:
         loop.run_until_complete(connect())
     except KeyboardInterrupt:
