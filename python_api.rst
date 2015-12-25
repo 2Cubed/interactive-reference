@@ -60,13 +60,13 @@ Quick Example Code
 
         # See the following link for working with protocol buffers in Python:
         # https://developers.google.com/protocol-buffers/docs/pythontutorial
-        report = proto.ProgressUpdate()
-        prog = report.progress.add()
+        update = proto.ProgressUpdate()
+        prog = update.progress.add()
         prog.target = prog.TACTILE
         prog.code = 38
         prog.progress = random()
 
-        conn.send(report)
+        conn.send(update)
 
 
     loop = asyncio.get_event_loop()
