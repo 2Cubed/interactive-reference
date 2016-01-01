@@ -85,8 +85,8 @@ The most notable change is that, rather than trying to join a channel's chat, we
 
 
         return beam.game.join(stream);
-    }).then(function (details) {
-        var robot = new Tetris.Robot(details);
+    }).then(function (res) {
+        var robot = new Tetris.Robot(res.body);
         robot.handshake();
 
         robot.on('report', function (report) {
@@ -143,8 +143,8 @@ The Final Code
         password: password
     }).attempt().then(function () {
         return beam.game.join(stream);
-    }).then(function (details) {
-        var robot = new Tetris.Robot(details);
+    }).then(function (res) {
+        var robot = new Tetris.Robot(res.body);
         robot.handshake();
 
         robot.on('report', function (report) {
