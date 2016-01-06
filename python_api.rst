@@ -2,7 +2,7 @@
 Python Client Library
 *********************
 
-The Python API is available `on Github <https://github.com/WatchBeam/beam-interactive-python>`_ and provides a foundation for interacting with Beam Interactive as a robot. It is built open asyncio and thus requires a Python version of 3.3 or newer. (You were looking for another reason to convince your boss up upgrade off 2.7, right?)
+The Python API is available `on Github <https://github.com/WatchBeam/beam-interactive-python>`_ and provides a foundation for interacting with Beam Interactive as a robot. It is built open asyncio and thus requires a Python version of 3.3 or newer. (You were looking for another reason to convince your boss to upgrade off 2.7, right?)
 
 If you've not yet, you should read though :doc:`/talking` and :doc:`/tutorial` to get a general overview of how Beam Interactive works.
 
