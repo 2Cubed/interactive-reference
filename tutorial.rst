@@ -86,9 +86,12 @@ The most notable change is that, rather than trying to join a channel's chat, we
 
         return beam.game.join(stream);
     }).then(function (res) {
-        res.body.remote = res.body.address;
-        res.body.channel = stream;
-        var robot = new Tetris.Robot(res.body);
+        var details = {
+            remote: res.body.address,
+            channel: stream,
+            key: res.body.key
+        };
+        var robot = new Tetris.Robot(details);
         robot.handshake();
 
         robot.on('report', function (report) {
@@ -146,11 +149,14 @@ The Final Code
     }).attempt().then(function () {
         return beam.game.join(stream);
     }).then(function (res) {
-        res.body.remote = res.body.address;
-        res.body.channel = stream;
-        var robot = new Tetris.Robot(res.body);
+        var details = {
+            remote: res.body.address,
+            channel: stream,
+            key: res.body.key
+        };
+        var robot = new Tetris.Robot(details);
         robot.handshake();
-        
+
         robot.on('report', function (report) {
             var mouse = robot.getMousePos();
             rjs.moveMouse(
