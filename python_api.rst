@@ -111,11 +111,6 @@ Quick Example Code
 
     loop.run_until_complete(connect())
 
-    try:
-        loop.run_forever()
-    finally:
-        loop.close()
-
 API Documentation
 =================
 
